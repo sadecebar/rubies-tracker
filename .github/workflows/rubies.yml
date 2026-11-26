@@ -1,0 +1,46 @@
+name: tracker-runner
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # backup restarter only; the job normally restarts itself
+  workflow_dispatch:
+    inputs:
+      preview:
+        description: "Post the rubies picture now and stop"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: tracker-runner
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    env:
+      # ---- settings ----
+      TRACK_USER: "imnotsadece"      # Roblox name to follow
+      RUBIES_BOARD: "Rubies"         # board id in the site's API
+      POST_EVERY_H: "4"              # post a picture every N hours (snapshots are hourly)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install browser
+        run: pip install playwright && playwright install --with-deps chromium
+      - name: Run tracker loop
+        run: python -u runner.py   # -u: log lines appear immediately
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PREVIEW: ${{ inputs.preview }}
+      - name: Start the next run
+        if: ${{ !cancelled() && inputs.preview != true }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run "${{ github.workflow }}" --ref "${{ github.ref_name }}"
