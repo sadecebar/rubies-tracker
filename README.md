@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="assets/avatar.png" alt="Rubies Tracker" width="140">
+  <img src="assets/banner.png" alt="Rubies Tracker - your place on the Rubies board, as a picture" width="100%">
 </p>
-
-<h1 align="center">Rubies Tracker</h1>
 
 <p align="center">
   <b>Keeps an eye on the <a href="https://petsuniverse.org/players">Pets Universe Rubies leaderboard</a> and sends one picture to Discord every 4 hours:<br>
@@ -21,7 +19,8 @@
 
 - 🏅 **Your place** on the Rubies board, your total, and how many places you moved
 - ⏱️ **Last 4 hours:** rubies made and your **rubies per hour**
-- 📅 **Today:** rubies made since 00:00 and your average per hour today
+- 📅 **Today:** rubies made since 00:00
+- 📆 **Per day:** what you make in a day at today's pace (today's rubies per hour × 24)
 - 📊 A small chart of your **rubies per hour** over the last 12 hours
 - 👥 **Around you:** the players right above and below you, their speed, and when someone passes whom
 

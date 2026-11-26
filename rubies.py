@@ -247,11 +247,12 @@ def build_html(r):
         tiles.append(("", "Per hour", "…", "needs a few hours of history"))
     if today:
         tiles.append(("", "Today", short(today["gain"], True), today["label"]))
-        tiles.append(("", "Today per hour", (short(today["rate"]) + "/h") if today["rate"] is not None else "…",
-                      f"over {dur(today['hours'])}"))
+        rt = today["rate"]
+        tiles.append(("", "Per day", (short(rt * 24) + "/day") if rt is not None else "…",
+                      f"today's pace · {short(rt)}/h over {dur(today['hours'])}" if rt is not None else ""))
     else:
         tiles.append(("", "Today", "…", "starts after the next check"))
-        tiles.append(("", "Today per hour", "…", "starts after the next check"))
+        tiles.append(("", "Per day", "…", "starts after the next check"))
     grid = "".join(f'<div class="tile {c}"><div class="k">{e(k)}</div><div class="v">{e(v)}</div><div class="s">{e(s)}</div></div>'
                    for c, k, v, s in tiles)
     chart = ""
@@ -350,7 +351,8 @@ def send_report(st):
         m, w, t = r["me"], r.get("win"), r.get("today")
         post(f"\U0001F48E **Rubies** · #{m['rank']} · {short(m['value'])}"
              + (f"\nLast {dur(w['hours'])}: {short(w['gain'], True)} ({short(w['rate'])}/h)" if w else "")
-             + (f"\nToday: {short(t['gain'], True)} {t['label']}" if t else ""))
+             + (f"\nToday: {short(t['gain'], True)} {t['label']}" if t else "")
+             + (f" · pace {short(t['rate'] * 24)}/day" if t and t.get("rate") is not None else ""))
     return 0
 
 
