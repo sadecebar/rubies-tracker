@@ -15,6 +15,15 @@
 
 ---
 
+## 🆕 What's new
+
+| Date | Update |
+|---|---|
+| **27 Nov 2026** | 🤖 **Want your own?** Send the repo link to any AI chatbot and ask it to set it up: there's now a step-by-step guide written for it |
+| **26 Nov 2026** | 📆 New **Per day** box: what you make in a full day at today's pace |
+| **26 Nov 2026** | 🖼️ New banner, in the same style as the other trackers |
+| **26 Nov 2026** | 💎 **Rubies Tracker is born**: your place, rubies per hour and today's total, as one picture every 4 hours |
+
 ## 💎 What the picture shows
 
 - 🏅 **Your place** on the Rubies board, your total, and how many places you moved
